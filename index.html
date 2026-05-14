@@ -141,39 +141,12 @@
 
     <!-- Smooth Scroll Container -->
     <main id="scroll-container">
-
-        <!-- Hero Section -->
-        <!-- <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="hero-bg.png" alt="Wedding Background" class="w-full h-full object-cover opacity-60 scale-110"
-                    id="hero-img">
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-accent"></div>
-            </div>
-
-            <div class="relative z-10 text-center px-4">
-                <span class="block text-secondary font-medium tracking-[0.3em] uppercase mb-4 opacity-0 reveal-up">The
-                    Marriage of</span>
-                <h1 class="text-6xl md:text-9xl font-playfair mb-6 opacity-0 reveal-up italic">Sarah & James</h1>
-                <div class="flex items-center justify-center gap-4 opacity-0 reveal-up">
-                    <span class="h-[1px] w-12 bg-secondary"></span>
-                    <p class="text-lg md:text-xl font-light tracking-widest uppercase">October 24, 2026</p>
-                    <span class="h-[1px] w-12 bg-secondary"></span>
-                </div>
-            </div>
-
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-secondary animate-bounce">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-                </svg>
-            </div>
-        </section> -->
         <section id="hero-zoom-section" class="h-screen relative overflow-hidden snap-start">
             <video id="hero-zoom-bg" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline
                 poster="Thanjau.jpg">
                 <source src="thanjur_video.mp4" type="video/mp4">
             </video>
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/30"></div>
             <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
                 <span id="intro-text" class="block text-white/70 font-light tracking-[0.4em] uppercase mb-2 opacity-0">
                     She is from
@@ -238,7 +211,7 @@
 
             <!-- Couple & Arch -->
             <div id="couple-container"
-                class="mb-[-3.5rem] relative z-10 w-full max-w-4xl px-4 flex flex-col items-center opacity-0 translate-y-20">
+                class="mb-[-3.5rem] relative z-20 w-full max-w-4xl px-4 flex flex-col items-center opacity-0 translate-y-20">
                 <div class="w-full max-w-[40rem] relative">
                     <!-- Main Couple Image -->
                     <img src="wedding.png" alt="Wedding Couple" class="w-full h-auto object-contain relative z-10" />
@@ -247,14 +220,14 @@
 
             <!-- Thiru Backdrop (Arch) -->
             <div id="thiru-arch"
-                class="absolute bottom-[-100px] z-5 lg:w-[65rem] w-[40rem] opacity-0 scale-95 origin-bottom translate-y-64">
+                class="absolute bottom-[-100px] z-10 lg:w-[65rem] w-[40rem] opacity-0 scale-95 origin-bottom translate-y-64">
                 <img src="thiru.png" alt="Decoration Arch" class="w-full h-auto" />
             </div>
             <!-- <div class="absolute right-0 z-0 w-80 top-0">
                 <img src="vaza.png" />
             </div> -->
-            <div id="trees-bg" class="absolute bottom-0 z-0 opacity-0 translate-y-32">
-                <img src="trees.png" alt="Trees Background" class="w-full h-auto" />
+            <div id="trees-bg" class="absolute bottom-0 bg-c z-0 opacity-0 translate-y-32">
+                <img src="trees.png" alt="Trees Background" class="w-full h-auto object-cover" />
             </div>
         </section>
         <section id="invitation-section"
