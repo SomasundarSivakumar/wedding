@@ -55,11 +55,11 @@ function createHeartBurst(x, y) {
     burstCanvas.style.zIndex = '10001';
     burstCanvas.style.pointerEvents = 'none';
     document.body.appendChild(burstCanvas);
-    
+
     burstCanvas.width = window.innerWidth;
     burstCanvas.height = window.innerHeight;
     const bctx = burstCanvas.getContext('2d');
-    
+
     let burstHearts = Array.from({ length: 50 }, () => ({
         x: x,
         y: y,
@@ -74,14 +74,14 @@ function createHeartBurst(x, y) {
     function animateBurst() {
         bctx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
         let active = false;
-        
+
         burstHearts.forEach(h => {
             h.x += Math.cos(h.angle) * h.speed;
             h.y += Math.sin(h.angle) * h.speed;
             h.speed *= 0.95; // Friction
             h.opacity -= 0.012;
             h.rotation += h.rotationSpeed;
-            
+
             if (h.opacity > 0) {
                 active = true;
                 drawBurstHeart(bctx, h);
@@ -94,14 +94,14 @@ function createHeartBurst(x, y) {
             burstCanvas.remove();
         }
     }
-    
+
     function drawBurstHeart(ctx, h) {
         ctx.save();
         ctx.translate(h.x, h.y);
         ctx.rotate(h.rotation);
         ctx.globalAlpha = h.opacity;
         ctx.fillStyle = '#D4AF37'; // Gold
-        
+
         const s = h.size;
         ctx.beginPath();
         ctx.moveTo(0, s * 0.3);
@@ -114,7 +114,7 @@ function createHeartBurst(x, y) {
         ctx.fill();
         ctx.restore();
     }
-    
+
     animateBurst();
 }
 
@@ -122,7 +122,7 @@ function createHeartBurst(x, y) {
 const startWebsite = () => {
     window.scrollTo(0, 0);
     if (lenis) lenis.scrollTo(0, { immediate: true });
-    
+
     // Trigger Heart Burst
     const btn = document.getElementById('open-btn');
     if (btn) {
@@ -139,30 +139,30 @@ const startWebsite = () => {
         duration: 1.2,
         ease: "power3.inOut"
     })
-    .to('#splash-screen', {
-        opacity: 0,
-        duration: 1.5,
-        ease: "power2.inOut"
-    }, "-=0.8")
-    .to('#hero-zoom-bg', {
-        scale: 1,
-        duration: 2,
-        ease: "power2.out"
-    }, "-=1.2")
-    .add(() => {
-        // Initial reveal for Hero 1
-        gsap.to('#intro-text', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
-        gsap.set('#typing-text', { opacity: 1 });
-        typeText('typing-text', "THANJAI PONNU");
-        gsap.fromTo('#blur-text', 
-            { opacity: 0, filter: 'blur(20px)', scale: 0.9 }, 
-            { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
-        );
+        .to('#splash-screen', {
+            opacity: 0,
+            duration: 1.5,
+            ease: "power2.inOut"
+        }, "-=0.8")
+        .to('#hero-zoom-bg', {
+            scale: 1,
+            duration: 2,
+            ease: "power2.out"
+        }, "-=1.2")
+        .add(() => {
+            // Initial reveal for Hero 1
+            gsap.to('#intro-text', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
+            gsap.set('#typing-text', { opacity: 1 });
+            typeText('typing-text', "THANJAI PONNU");
+            gsap.fromTo('#blur-text',
+                { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
+                { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
+            );
 
-        lenis.start();
-        document.getElementById('splash-screen').style.display = 'none';
-        ScrollTrigger.refresh();
-    });
+            lenis.start();
+            document.getElementById('splash-screen').style.display = 'none';
+            ScrollTrigger.refresh();
+        });
 };
 
 // Reusable Typing Animation Function
@@ -191,8 +191,8 @@ ScrollTrigger.create({
         gsap.to('#intro-text', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
         gsap.set('#typing-text', { opacity: 1 });
         typeText('typing-text', "THANJAI PONNU");
-        gsap.fromTo('#blur-text', 
-            { opacity: 0, filter: 'blur(20px)', scale: 0.9 }, 
+        gsap.fromTo('#blur-text',
+            { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
             { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
         );
     },
@@ -213,7 +213,7 @@ const reveals = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-rig
 reveals.forEach((el) => {
     let x = 0;
     let y = 50;
-    
+
     if (el.classList.contains('reveal-left')) {
         x = -100;
         y = 0;
@@ -222,12 +222,12 @@ reveals.forEach((el) => {
         y = 0;
     }
 
-    gsap.fromTo(el, 
-        { 
-            opacity: 0, 
+    gsap.fromTo(el,
+        {
+            opacity: 0,
             x: x,
-            y: y 
-        }, 
+            y: y
+        },
         {
             opacity: 1,
             x: 0,
@@ -459,7 +459,7 @@ gsap.to("#hero-zoom-bg", {
 });
 
 // Hero Scroll Zoom Effect (Section 2 - Zoom Out)
-gsap.fromTo("#hero-zoom-bg-2", 
+gsap.fromTo("#hero-zoom-bg-2",
     { scale: 1.5 },
     {
         scale: 1,
@@ -481,8 +481,8 @@ ScrollTrigger.create({
         gsap.to('#intro-text-2', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
         gsap.set('#typing-text-2', { opacity: 1 });
         typeText('typing-text-2', "DHARMAPURI MAPLA");
-        gsap.fromTo('#blur-text-2', 
-            { opacity: 0, filter: 'blur(20px)', scale: 0.9 }, 
+        gsap.fromTo('#blur-text-2',
+            { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
             { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
         );
     },
@@ -490,8 +490,8 @@ ScrollTrigger.create({
         gsap.to('#intro-text-2', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
         gsap.set('#typing-text-2', { opacity: 1 });
         typeText('typing-text-2', "DHARMAPURI MAPLA");
-        gsap.fromTo('#blur-text-2', 
-            { opacity: 0, filter: 'blur(20px)', scale: 0.9 }, 
+        gsap.fromTo('#blur-text-2',
+            { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
             { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
         );
     },
@@ -531,12 +531,12 @@ ScrollTrigger.create({
     onEnter: () => {
         const tl = gsap.timeline();
         tl.to("#trees-bg", { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" })
-          .fromTo("#thiru-arch", 
-            { opacity: 0, y: 500, scale: 0.8 },
-            { opacity: 1, y: 0, scale: 1, duration: 2.5, ease: "power4.out" },
-            "-=0.8"
-          )
-          .to("#couple-container", { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "-=1.2");
+            .fromTo("#thiru-arch",
+                { opacity: 0, y: 500, scale: 0.8 },
+                { opacity: 1, y: 0, scale: 1, duration: 2.5, ease: "power4.out" },
+                "-=0.8"
+            )
+            .to("#couple-container", { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, "-=1.2");
 
         if (leaves.length === 0) initLeaves();
         gsap.ticker.add(animateLeavesTick);
@@ -547,8 +547,8 @@ ScrollTrigger.create({
         // Sequential reveal on scroll back
         const tl = gsap.timeline();
         tl.to("#trees-bg", { opacity: 1, y: 0, duration: 1 })
-          .to("#thiru-arch", { opacity: 1, y: 0, duration: 1 }, "-=0.5")
-          .to("#couple-container", { opacity: 1, y: 0, duration: 0.8 }, "-=0.5");
+            .to("#thiru-arch", { opacity: 1, y: 0, duration: 1 }, "-=0.5")
+            .to("#couple-container", { opacity: 1, y: 0, duration: 0.8 }, "-=0.5");
     },
     onLeaveBack: () => {
         gsap.ticker.remove(animateLeavesTick);
@@ -601,7 +601,7 @@ class Heart {
         ctx.translate(this.x, this.y);
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = '#C5A059'; // Gold Theme Color
-        
+
         const s = this.size;
         ctx.beginPath();
         ctx.moveTo(0, s * 0.3);
@@ -620,10 +620,10 @@ ScrollTrigger.create({
     trigger: "#invitation-section",
     start: "top 60%",
     onEnter: () => {
-        gsap.to("#invitation-content", { 
-            opacity: 1, 
-            scale: 1, 
-            duration: 2, 
+        gsap.to("#invitation-content", {
+            opacity: 1,
+            scale: 1,
+            duration: 2,
             ease: "power2.out",
             filter: "blur(0px)",
             startAt: { filter: "blur(10px)" }
@@ -671,22 +671,22 @@ class Leaf {
         ctx.translate(this.x, this.y);
         ctx.rotate((this.rotation * Math.PI) / 180);
         ctx.fillStyle = this.color;
-        
+
         // Simple Leaf Shape
         ctx.beginPath();
-        ctx.moveTo(0, -this.size/2);
-        ctx.quadraticCurveTo(this.size/2, 0, 0, this.size/2);
-        ctx.quadraticCurveTo(-this.size/2, 0, 0, -this.size/2);
+        ctx.moveTo(0, -this.size / 2);
+        ctx.quadraticCurveTo(this.size / 2, 0, 0, this.size / 2);
+        ctx.quadraticCurveTo(-this.size / 2, 0, 0, -this.size / 2);
         ctx.fill();
-        
+
         // Leaf vein
         ctx.strokeStyle = 'rgba(255,255,255,0.2)';
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.moveTo(0, -this.size/2);
-        ctx.lineTo(0, this.size/2);
+        ctx.moveTo(0, -this.size / 2);
+        ctx.lineTo(0, this.size / 2);
         ctx.stroke();
-        
+
         ctx.restore();
     }
 }
@@ -731,7 +731,7 @@ const originalStartWebsite = startWebsite;
 const startWebsiteWithCleanup = () => {
     const music = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-toggle');
-    
+
     if (music) {
         music.play().then(() => {
             if (musicBtn) {
@@ -739,7 +739,7 @@ const startWebsiteWithCleanup = () => {
             }
         }).catch(e => console.log("Audio playback failed:", e));
     }
-    
+
     cancelAnimationFrame(fireworksAnimation);
     originalStartWebsite();
 };
@@ -788,18 +788,18 @@ ScrollTrigger.create({
     onEnter: () => {
         const tl = gsap.timeline();
         tl.to("#welcome-subtitle", { opacity: 1, y: -20, duration: 1, ease: "power2.out" })
-          .to("#welcome-title", { 
-            opacity: 1, 
-            y: -20, 
-            duration: 1.5, 
-            ease: "power3.out",
-            filter: "blur(0px)",
-            startAt: { filter: "blur(20px)" }
-          }, "-=0.5")
-          .to(".welcome-line", { scaleX: 1, opacity: 1, duration: 1, ease: "power2.inOut" }, "-=0.8")
-          .to(".welcome-text", { opacity: 1, y: -10, duration: 1, ease: "power2.out" }, "-=0.5")
-          .to(".welcome-image", { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5");
-        
+            .to("#welcome-title", {
+                opacity: 1,
+                y: -20,
+                duration: 1.5,
+                ease: "power3.out",
+                filter: "blur(0px)",
+                startAt: { filter: "blur(20px)" }
+            }, "-=0.5")
+            .to(".welcome-line", { scaleX: 1, opacity: 1, duration: 1, ease: "power2.inOut" }, "-=0.8")
+            .to(".welcome-text", { opacity: 1, y: -10, duration: 1, ease: "power2.out" }, "-=0.5")
+            .to(".welcome-image", { opacity: 1, scale: 1, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5");
+
         // Background subtle movement
         gsap.to("#welcome-section .bg-repeat", {
             backgroundPosition: "100px 100px",
@@ -822,18 +822,18 @@ let isDragging = false;
 
 function initScratchCard() {
     if (!scratchCanvas || !sctx) return;
-    
+
     const container = scratchCanvas.parentElement;
     scratchCanvas.width = container.offsetWidth;
     scratchCanvas.height = container.offsetHeight;
 
     // Fill with scratchable layer - Deep Red/Maroon
-    sctx.fillStyle = '#8B0000'; 
+    sctx.fillStyle = '#8B0000';
     sctx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
     // Add Gold pattern to the scratch layer
     sctx.globalCompositeOperation = 'source-over';
-    sctx.strokeStyle = '#D4AF37'; 
+    sctx.strokeStyle = '#D4AF37';
     sctx.lineWidth = 1;
     sctx.globalAlpha = 0.2;
     for (let i = 0; i < 40; i++) {
@@ -843,14 +843,14 @@ function initScratchCard() {
         sctx.stroke();
     }
     sctx.globalAlpha = 1;
-    
+
     // Reset composite for scratching
     sctx.globalCompositeOperation = 'destination-out';
 }
 
 function scratch(e) {
     if (!isDragging || !sctx) return;
-    
+
     const rect = scratchCanvas.getBoundingClientRect();
     const x = (e.clientX || e.touches[0].clientX) - rect.left;
     const y = (e.clientY || e.touches[0].clientY) - rect.top;
@@ -866,17 +866,19 @@ function checkScratchPercentage() {
     const imageData = sctx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
     const pixels = imageData.data;
     let transparent = 0;
-    
+
     for (let i = 3; i < pixels.length; i += 4) {
         if (pixels[i] === 0) transparent++;
     }
 
     const percentage = (transparent / (pixels.length / 4)) * 100;
     if (percentage > 50) {
-        gsap.to(scratchCanvas, { opacity: 0, duration: 1, onComplete: () => {
-            scratchCanvas.style.display = 'none';
-            startCelebration();
-        }});
+        gsap.to(scratchCanvas, {
+            opacity: 0, duration: 1, onComplete: () => {
+                scratchCanvas.style.display = 'none';
+                startCelebration();
+            }
+        });
     }
 }
 
@@ -913,12 +915,12 @@ class Balloon {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.globalAlpha = 0.8;
-        
+
         // String
         ctx.beginPath();
         ctx.moveTo(0, this.radius);
         ctx.bezierCurveTo(5, this.radius + 10, -5, this.radius + 20, 0, this.radius + this.stringLen);
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)'; 
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
         ctx.stroke();
 
         // Heart Shape
@@ -933,7 +935,7 @@ class Balloon {
         ctx.bezierCurveTo(s * 0.05, 0, 0, s * 0.3, 0, s * 0.3);
         ctx.fillStyle = this.color;
         ctx.fill();
-        
+
         // Highlight
         ctx.beginPath();
         ctx.arc(-s * 0.4, s * 0.4, s * 0.1, 0, Math.PI * 2);
@@ -971,7 +973,7 @@ class ConfettiPiece {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation * Math.PI / 180);
         ctx.fillStyle = this.color;
-        ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
         ctx.restore();
     }
 }
@@ -981,10 +983,10 @@ function startCelebration() {
     celebrationActive = true;
     celebCanvas.width = window.innerWidth;
     celebCanvas.height = window.innerHeight;
-    
+
     balloons = Array.from({ length: 15 }, () => new Balloon(celebCanvas));
     confetti = Array.from({ length: 80 }, () => new ConfettiPiece(celebCanvas));
-    
+
     gsap.ticker.add(animateCelebration);
 
     // Stop celebration after 2 minutes (120,000 ms)
@@ -996,12 +998,12 @@ function startCelebration() {
 function animateCelebration() {
     if (!cctx) return;
     cctx.clearRect(0, 0, celebCanvas.width, celebCanvas.height);
-    
+
     balloons.forEach(b => {
         b.update();
         b.draw(cctx);
     });
-    
+
     confetti.forEach(c => {
         c.update();
         c.draw(cctx);
@@ -1011,17 +1013,17 @@ function animateCelebration() {
 function stopCelebration() {
     celebrationActive = false;
     gsap.ticker.remove(animateCelebration);
-    
+
     // Fade out canvas
-    gsap.to(celebCanvas, { 
-        opacity: 0, 
-        duration: 2, 
+    gsap.to(celebCanvas, {
+        opacity: 0,
+        duration: 2,
         onComplete: () => {
             if (cctx) cctx.clearRect(0, 0, celebCanvas.width, celebCanvas.height);
             balloons = [];
             confetti = [];
             celebCanvas.style.opacity = 1; // Reset for next time if needed
-        } 
+        }
     });
 }
 
