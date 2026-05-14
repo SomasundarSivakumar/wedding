@@ -143,6 +143,11 @@ body {
     }
 }
 
+.snap-start {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
 #splash-screen {
     touch-action: none;
 }

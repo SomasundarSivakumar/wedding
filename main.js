@@ -769,16 +769,22 @@ document.getElementById('open-btn').addEventListener('click', startWebsiteWithCl
 const sections = document.querySelectorAll('section.snap-start');
 if (sections.length > 0) {
     ScrollTrigger.create({
-        trigger: "main", // Changed to main container to cover all sections
+        trigger: "main",
         start: "top top",
         end: "bottom bottom",
         snap: {
             snapTo: 1 / (sections.length - 1),
-            duration: { min: 0.2, max: 0.6 },
-            delay: 0.1,
-            ease: "power2.inOut"
+            duration: { min: 0.2, max: 0.5 },
+            delay: 0.05,
+            ease: "power2.inOut",
+            directional: true // Important for "next" feel
         }
     });
+}
+
+// Extra Mobile Smoothness for Snapping
+if (window.innerWidth < 768) {
+    lenis.options.lerp = 0.05; // Slightly slower lerp for mobile to let snap catch
 }
 
 // Welcome Section Animation
