@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangaru Kamatchi & Ajith Kumar S | Wedding Invitation</title>
+    <meta name="description"
+        content="You are cordially invited to celebrate the union of Bangaru Kamatchi and Ajith Kumar S. A day of love, laughter, and forever.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2D3436',
+                        secondary: '#D4AF37', // Gold
+                        accent: '#F9F7F2',
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'thanjai': "url('Thanjau.jpg')",
+                        'hoke': "url('Hokenakkal.jpg')",
+                        'hoke_1': "url('hoke_1.jpg')",
+                        'bg2': "url('back.png')",
+                        'bg3': "url('bg-traditional-desktop.png')",
+
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-accent text-primary font-outfit overflow-x-hidden">
+
+    <!-- Splash / Entry Screen -->
+    <div id="splash-screen" class="fixed inset-0 z-[10000] flex items-center justify-center overflow-hidden">
+        <canvas id="fireworks-canvas" class="absolute inset-0 z-[5] pointer-events-none"></canvas>
+
+        <div id="splash-bg" class="absolute inset-0 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] z-0">
+        </div>
+
+        <div id="splash-card-wrapper" class="relative z-10 w-[90%] max-w-lg">
+            <div id="splash-card"
+                class="relative bg-white/10 backdrop-blur-xl p-12 md:p-20 rounded-[2rem] border border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] text-center overflow-hidden group">
+                <!-- Decorative Elements -->
+                <div
+                    class="absolute -top-24 -right-24 w-48 h-48 bg-secondary/20 rounded-full blur-3xl transition-all group-hover:bg-secondary/30">
+                </div>
+                <div
+                    class="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/40 rounded-full blur-3xl transition-all group-hover:bg-primary/60">
+                </div>
+
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-48 md:w-64 mb-12 transform transition-transform duration-700 group-hover:scale-105">
+                        <img src="image.png" alt="Wedding Logo" class="w-full h-auto drop-shadow-2xl">
+                    </div>
+
+                    <div class="space-y-6">
+                        <span
+                            class="block text-secondary font-outfit tracking-[0.5em] uppercase text-[10px] md:text-xs opacity-70 mb-12">
+                            A Wedding Invitation
+                        </span>
+
+                        <div class="relative group">
+                            <!-- Orbiting Hearts -->
+                            <div class="absolute inset-0 pointer-events-none">
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 animate-bounce opacity-40">
+                                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                                <div class="absolute bottom-0 left-0 -translate-x-6 translate-y-2 animate-pulse opacity-30">
+                                    <svg class="w-3 h-3 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                                <div class="absolute top-1/2 right-0 translate-x-6 -translate-y-4 animate-bounce opacity-30">
+                                    <svg class="w-3 h-3 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3.01 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                            </div>
+
+                            <button id="open-btn"
+                                class="group relative px-12 py-4 bg-secondary text-primary font-bold rounded-full overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] active:scale-95">
+                                <span class="relative z-10 tracking-[0.3em] text-[10px] uppercase">Reveal Invitation</span>
+                                <div
+                                    class="absolute inset-0 bg-white translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor"
+        class="fixed w-4 h-4 bg-secondary rounded-full pointer-events-none z-[9999] opacity-0 mix-blend-difference">
+    </div>
+
+    <!-- Smooth Scroll Container -->
+    <main id="scroll-container">
+
+        <!-- Hero Section -->
+        <!-- <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="hero-bg.png" alt="Wedding Background" class="w-full h-full object-cover opacity-60 scale-110"
+                    id="hero-img">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-accent"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-4">
+                <span class="block text-secondary font-medium tracking-[0.3em] uppercase mb-4 opacity-0 reveal-up">The
+                    Marriage of</span>
+                <h1 class="text-6xl md:text-9xl font-playfair mb-6 opacity-0 reveal-up italic">Sarah & James</h1>
+                <div class="flex items-center justify-center gap-4 opacity-0 reveal-up">
+                    <span class="h-[1px] w-12 bg-secondary"></span>
+                    <p class="text-lg md:text-xl font-light tracking-widest uppercase">October 24, 2026</p>
+                    <span class="h-[1px] w-12 bg-secondary"></span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-secondary animate-bounce">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                </svg>
+            </div>
+        </section> -->
+        <section id="hero-zoom-section" class="h-screen relative overflow-hidden snap-start">
+            <video id="hero-zoom-bg" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline
+                poster="Thanjau.jpg">
+                <source src="thanjur_video.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/70"></div>
+            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+                <span id="intro-text" class="block text-white/70 font-light tracking-[0.4em] uppercase mb-2 opacity-0">
+                    She is from
+                </span>
+                <span id="typing-text"
+                    class="block text-secondary font-medium tracking-[0.4em] uppercase mb-4 opacity-0">
+                    <!-- Text will be typed here -->
+                </span>
+                <h1 id="blur-text" class="text-white text-6xl md:text-9xl font-playfair mb-6 italic opacity-0">
+                    Bangaru Kamatchi
+                </h1>
+            </div>
+        </section>
+
+        <!-- Groom Section -->
+        <section id="hero-zoom-section-2" class="h-screen relative overflow-hidden snap-start">
+            <video id="hero-zoom-bg-2" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop
+                playsinline poster="Hokenakkal.jpg">
+                <source src="Hokenakkal.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/70"></div>
+            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+                <span id="intro-text-2"
+                    class="block text-white/70 font-light tracking-[0.4em] uppercase mb-2 opacity-0">
+                    He is from
+                </span>
+                <span id="typing-text-2"
+                    class="block text-secondary font-medium tracking-[0.4em] uppercase mb-4 opacity-0">
+
+                </span>
+                <h1 id="blur-text-2" class="text-white text-6xl md:text-9xl font-playfair mb-6 italic opacity-0">
+                    Ajith Kumar S
+                </h1>
+            </div>
+        </section>
+
+
+        <!-- Story Section (Decoration & Couple) -->
+        <section id="decoration-section"
+            class="h-screen relative bg-accent flex items-end justify-center overflow-hidden snap-start">
+            <!-- Falling Leaves Canvas -->
+            <canvas id="leaf-canvas" class="absolute inset-0 z-[15] pointer-events-none"></canvas>
+
+            <!-- Decorative Background Pattern -->
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <div class="absolute inset-0 bg-[url('pattern.png')] bg-repeat"></div>
+            </div>
+
+            <!-- Hanging Marigolds (CSS Based) -->
+            <div class="marigold-garland absolute top-[-50px] left-[15%] w-8 z-20">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="marigold-garland absolute top-[-100px] left-[25%] w-8 z-20">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="marigold-garland absolute top-[-50px] right-[15%] w-8 z-20">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="marigold-garland absolute top-[-100px] right-[25%] w-8 z-20">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <!-- Couple & Arch -->
+            <div id="couple-container"
+                class="mb-[-3.5rem] relative z-10 w-full max-w-4xl px-4 flex flex-col items-center opacity-0 translate-y-20">
+                <div class="w-full max-w-[40rem] relative">
+                    <!-- Main Couple Image -->
+                    <img src="wedding.png" alt="Wedding Couple" class="w-full h-auto object-contain relative z-10" />
+                </div>
+            </div>
+
+            <!-- Thiru Backdrop (Arch) -->
+            <div id="thiru-arch"
+                class="absolute bottom-[-100px] z-5 w-[65rem] opacity-0 scale-95 origin-bottom translate-y-64">
+                <img src="thiru.png" alt="Decoration Arch" class="w-full h-auto" />
+            </div>
+            <!-- <div class="absolute right-0 z-0 w-80 top-0">
+                <img src="vaza.png" />
+            </div> -->
+            <div id="trees-bg" class="absolute bottom-0 z-0 opacity-0 translate-y-32">
+                <img src="trees.png" alt="Trees Background" class="w-full h-auto" />
+            </div>
+        </section>
+        <section id="invitation-section"
+            class="h-screen relative flex items-center justify-center bg-white overflow-hidden snap-start">
+            <!-- Flying Hearts Canvas -->
+            <canvas id="heart-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+            <div id="invitation-content" class="relative z-10 text-center px-4 opacity-0 scale-95">
+                <span class="block text-secondary font-playfair italic text-xl mb-12 tracking-[0.3em]">
+                    Together with their families
+                </span>
+
+                <h2 class="text-[#30021a] text-5xl md:text-8xl font-playfair mb-4 tracking-tighter leading-tight">
+                    Bangaru Kamatchi G
+                </h2>
+
+                <div class="flex items-center justify-center gap-8 my-10">
+                    <div class="h-[1px] w-16 bg-secondary/30"></div>
+                    <span class="text-secondary text-4xl md:text-6xl font-playfair italic">&</span>
+                    <div class="h-[1px] w-16 bg-secondary/30"></div>
+                </div>
+
+                <h2 class="text-[#30021a] text-5xl md:text-8xl font-playfair mb-12 tracking-tighter leading-tight">
+                    Ajith Kumar S
+                </h2>
+
+                <p
+                    class="text-[#30021a]/60 font-light tracking-[0.5em] uppercase text-xs md:text-sm mt-16 max-w-lg mx-auto leading-loose">
+                    invite you to celebrate their wedding
+                </p>
+            </div>
+        </section>
+        <!-- Save the Date Section -->
+        <section id="save-the-date"
+            class="h-screen relative flex items-center justify-center bg-[#FAF9F6] overflow-hidden snap-start">
+            <!-- Celebratory Canvas (Balloons & Confetti) -->
+            <canvas id="celebration-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+            <div class="relative z-10 w-full max-w-5xl px-6 py-12 text-center">
+                <!-- Header -->
+                <div class="mb-12 reveal-up">
+                    <div class="w-12 h-[1px] bg-secondary/50 mx-auto mb-6"></div>
+                    <span
+                        class="block text-[#30021a] font-outfit font-light tracking-[0.8em] uppercase text-[10px] md:text-xs mb-4">
+                        Save the Date
+                    </span>
+                    <h2 class="font-playfair text-[#30021a] text-4xl md:text-6xl mb-4 italic">The Big Reveal</h2>
+                    <p class="font-outfit text-[#30021a]/60 text-sm tracking-widest italic">Scratch the card to see the
+                        magic happen</p>
+                </div>
+
+                <!-- Premium Scratch Card Container -->
+                <div class="relative w-full max-w-xl mx-auto mb-16 reveal-up">
+                    <!-- Ornate Frame -->
+                    <div class="absolute -inset-4 border border-secondary/20 rounded-[2rem] pointer-events-none"></div>
+                    <div class="absolute -inset-2 border border-secondary/40 rounded-[1.8rem] pointer-events-none">
+                    </div>
+
+                    <div
+                        class="relative aspect-[16/9] rounded-[1.5rem] overflow-hidden shadow-[0_20px_50px_rgba(48,2,26,0.15)] bg-white border border-secondary/30">
+                        <!-- Revealed Content (Date & Time) -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#30021a] p-8">
+                            <div
+                                class="border border-secondary/30 p-6 md:p-10 w-full h-full flex flex-col items-center justify-center rounded-xl">
+                                <span class="text-secondary/60 text-[10px] uppercase tracking-[0.5em] mb-4">You're
+                                    Invited</span>
+                                <h2 class="text-secondary text-5xl md:text-7xl font-playfair mb-2 tracking-tighter">
+                                    29 <span class="text-3xl md:text-4xl italic">May</span> 2026
+                                </h2>
+                                <div class="h-[1px] w-16 bg-secondary/30 my-4"></div>
+                                <p class="text-secondary/80 font-playfair italic text-lg">6:00 AM — 7:30 AM</p>
+                            </div>
+                        </div>
+
+                        <!-- Scratch Canvas Overlay -->
+                        <canvas id="scratch-canvas" class="absolute inset-0 z-20 cursor-crosshair touch-none"></canvas>
+                    </div>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div id="countdown" class="flex items-center justify-center gap-6 md:gap-12">
+                    <div class="countdown-item">
+                        <span id="days" class="block text-[#30021a] text-4xl md:text-6xl font-playfair mb-1">00</span>
+                        <span class="text-[#30021a]/40 text-[9px] uppercase tracking-[0.3em] font-bold">Days</span>
+                    </div>
+                    <div class="w-[1px] h-12 bg-secondary/20 hidden md:block"></div>
+                    <div class="countdown-item">
+                        <span id="hours" class="block text-[#30021a] text-4xl md:text-6xl font-playfair mb-1">00</span>
+                        <span class="text-[#30021a]/40 text-[9px] uppercase tracking-[0.3em] font-bold">Hours</span>
+                    </div>
+                    <div class="w-[1px] h-12 bg-secondary/20 hidden md:block"></div>
+                    <div class="countdown-item">
+                        <span id="mins" class="block text-[#30021a] text-4xl md:text-6xl font-playfair mb-1">00</span>
+                        <span class="text-[#30021a]/40 text-[9px] uppercase tracking-[0.3em] font-bold">Mins</span>
+                    </div>
+                    <div class="w-[1px] h-12 bg-secondary/20 hidden md:block"></div>
+                    <div class="countdown-item">
+                        <span id="secs" class="block text-[#30021a] text-4xl md:text-6xl font-playfair mb-1">00</span>
+                        <span class="text-[#30021a]/40 text-[9px] uppercase tracking-[0.3em] font-bold">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events-section"
+            class="h-screen relative flex items-center justify-center bg-bg3 bg-cover bg-center overflow-hidden snap-start">
+            <!-- Solid Black Overlay -->
+            <div class="absolute inset-0 bg-black/70 z-0"></div>
+
+            <div class="relative z-10 w-full max-w-6xl px-6 text-center">
+
+                <!-- Section Header -->
+                <div class="mb-16 reveal-up">
+                    <span
+                        class="block text-secondary font-outfit font-light tracking-[0.8em] uppercase text-[10px] md:text-xs mb-4">
+                        The Celebration
+                    </span>
+                    <h2 class="font-playfair text-white text-4xl md:text-6xl italic">Event Details</h2>
+                    <div class="w-16 h-[1px] bg-secondary/30 mx-auto mt-6"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-stretch">
+                    <!-- Wedding Card -->
+                    <div
+                        class="group relative p-10 md:p-16 bg-white/10 backdrop-blur-md border border-secondary/20 shadow-2xl rounded-2xl transition-all hover:bg-white/15 reveal-up">
+                        <div
+                            class="absolute inset-4 border border-secondary/10 rounded-xl pointer-events-none transition-all group-hover:inset-3">
+                        </div>
+
+                        <div class="relative z-10">
+                            <span
+                                class="inline-block px-4 py-1 border border-secondary/20 text-secondary text-[9px] uppercase tracking-[0.4em] mb-8 rounded-full">Wedding
+                                Ceremony</span>
+                            <h3 class="text-white text-4xl md:text-5xl font-playfair mb-8 tracking-wider uppercase">
+                                Thirumanam</h3>
+
+                            <div class="space-y-6">
+                                <div class="flex flex-col items-center gap-2">
+                                    <p class="text-white/80 text-lg font-playfair italic">Thursday, 29 May 2026</p>
+                                    <p class="text-secondary font-medium tracking-widest text-xs">6:00 AM — 7:30 AM</p>
+                                </div>
+                                <div class="h-[1px] w-8 bg-secondary/20 mx-auto"></div>
+                                <p class="text-white font-medium tracking-widest uppercase text-xs">SKS Karlmarx Mahal
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reception Card -->
+                    <div
+                        class="group relative p-10 md:p-16 bg-white/10 backdrop-blur-md border border-secondary/20 shadow-2xl rounded-2xl transition-all hover:bg-white/15 reveal-up">
+                        <div
+                            class="absolute inset-4 border border-secondary/10 rounded-xl pointer-events-none transition-all group-hover:inset-3">
+                        </div>
+
+                        <div class="relative z-10">
+                            <span
+                                class="inline-block px-4 py-1 border border-secondary/20 text-secondary text-[9px] uppercase tracking-[0.4em] mb-8 rounded-full">Reception</span>
+                            <h3 class="text-white text-4xl md:text-5xl font-playfair mb-8 tracking-wider uppercase">
+                                Virundu</h3>
+
+                            <div class="space-y-6">
+                                <div class="flex flex-col items-center gap-2">
+                                    <p class="text-white/80 text-lg font-playfair italic">Sunday, 07 June 2026</p>
+                                    <p class="text-secondary font-medium tracking-widest text-xs">6:00 PM Onwards</p>
+                                </div>
+                                <div class="h-[1px] w-8 bg-secondary/20 mx-auto"></div>
+                                <p class="text-white font-medium tracking-widest uppercase text-xs">Celebration Hall</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtle Bottom Accent -->
+                <div class="mt-16 reveal-up">
+                    <p class="font-playfair italic text-white/40 text-sm">We look forward to seeing you there</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="welcome-section"
+            class="h-screen relative flex items-center justify-center bg-[#FAF9F6] overflow-hidden snap-start">
+            <!-- Subtle Texture Background -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <div class="absolute inset-0 bg-[url('pattern.png')] bg-repeat"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-6 max-w-4xl">
+                <div class="mb-8 welcome-reveal">
+                    <span class="block text-secondary font-playfair italic text-2xl mb-4 opacity-0"
+                        id="welcome-subtitle">
+                        Welcome to our
+                    </span>
+                    <h2 class="text-[#30021a] text-6xl md:text-9xl font-playfair mb-8 tracking-tighter leading-tight italic opacity-0"
+                        id="welcome-title">
+                        Beautiful Journey
+                    </h2>
+                </div>
+
+                <div class="h-[1px] w-24 bg-secondary/30 mx-auto mb-12 welcome-line opacity-0"></div>
+
+                <p
+                    class="text-[#30021a]/80 font-outfit text-lg md:text-xl leading-relaxed mb-12 welcome-text opacity-0">
+                    "Love is not about how many days, months, or years you have been together. <br
+                        class="hidden md:block">
+                    Love is about how much you love each other every single day."
+                </p>
+
+                <div class="welcome-image opacity-0">
+                    <img src="welcome.jpg" alt="Decoration"
+                        class="w-28 h-auto mx-auto opacity-40 hover:opacity-100 transition-opacity duration-700">
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+
+
+        <!-- Footer -->
+        <!-- <footer class="py-12 text-center text-gray-500 text-sm tracking-widest uppercase">
+            &copy; 2026 Bangaru Kamatchi & Ajith Kumar S. All rights reserved.
+        </footer> -->
+
+    </main>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <audio id="bg-music" src="Tum-Tum-MassTamilan.fm.mp3" loop></audio>
+
+    <!-- Music Control Button -->
+    <button id="music-toggle" class="fixed bottom-6 right-6 z-[9998] w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-secondary shadow-2xl transition-all hover:scale-110 active:scale-95 opacity-0 pointer-events-none">
+        <svg id="music-on-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <svg id="music-off-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/>
+        </svg>
+    </button>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
