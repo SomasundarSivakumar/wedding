@@ -158,6 +158,10 @@ const startWebsite = () => {
                 { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
                 { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
             );
+            gsap.fromTo('#global-scroll-btn',
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 1, delay: 2.5, ease: "power2.out" }
+            );
 
             lenis.start();
             document.getElementById('splash-screen').style.display = 'none';
@@ -183,26 +187,39 @@ function typeText(elementId, text, speed = 0.1) {
     });
 }
 
-// Hero Section 1 Content Animation (For Scroll Re-entry)
-ScrollTrigger.create({
-    trigger: "#hero-zoom-section",
-    start: "top 20%",
-    onEnterBack: () => {
-        gsap.to('#intro-text', { opacity: 1, y: -10, duration: 1, ease: "power2.out" });
-        gsap.set('#typing-text', { opacity: 1 });
-        typeText('typing-text', "THANJAI PONNU");
-        gsap.fromTo('#blur-text',
-            { opacity: 0, filter: 'blur(20px)', scale: 0.9 },
-            { opacity: 1, filter: 'blur(0px)', scale: 1, duration: 2, delay: 1.5, ease: "power2.out" }
-        );
-    },
-    onLeave: () => {
-        gsap.set(['#intro-text', '#typing-text', '#blur-text'], { opacity: 0, y: 0 });
-    },
-    onLeaveBack: () => {
-        gsap.set(['#intro-text', '#typing-text', '#blur-text'], { opacity: 0, y: 0 });
-    }
-});
+
+
+// Global Fixed Scroll Button Logic
+const globalBtn = document.getElementById('global-scroll-btn');
+if (globalBtn) {
+    globalBtn.addEventListener('click', () => {
+        const sections = Array.from(document.querySelectorAll('section.snap-start'));
+        let nextSection = null;
+        for (let i = 0; i < sections.length; i++) {
+            const rect = sections[i].getBoundingClientRect();
+            // A section is "next" if its top edge is below the top of the viewport
+            if (rect.top > 50) {
+                nextSection = sections[i];
+                break;
+            }
+        }
+
+        if (nextSection && lenis) {
+            lenis.scrollTo(nextSection, { 
+                duration: 2.5, 
+                easing: (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2 
+            });
+        }
+    });
+
+    // Hide the global button when reaching the very last section (Welcome Section)
+    ScrollTrigger.create({
+        trigger: "#welcome-section",
+        start: "top center",
+        onEnter: () => gsap.to(globalBtn, { opacity: 0, scale: 0.8, pointerEvents: "none", duration: 0.5 }),
+        onLeaveBack: () => gsap.to(globalBtn, { opacity: 1, scale: 1, pointerEvents: "auto", duration: 0.5 })
+    });
+}
 
 // Open Button Listener
 document.getElementById('open-btn').addEventListener('click', startWebsite);
@@ -1081,3 +1098,115 @@ window.addEventListener('resize', () => {
 // Trigger Init
 window.addEventListener('load', initScratchCard);
 ScrollTrigger.addEventListener('refreshInit', initScratchCard);
+
+// Location Section Animations
+window.addEventListener('load', () => {
+    const carWrapper = document.getElementById("road-car-wrapper");
+    const road = document.getElementById("location-road");
+    
+    if (carWrapper && road) {
+        // Car moving down the road
+        ScrollTrigger.create({
+            trigger: "#location-section",
+            start: "top center",
+            end: "bottom center",
+            animation: gsap.to(carWrapper, {
+                y: () => road.offsetHeight + 20,
+                ease: "none"
+            }),
+            scrub: 1
+        });
+
+
+
+        // Map 1 Reveal
+        gsap.fromTo(".map-reveal-1", 
+            { opacity: 0, x: -50 },
+            { opacity: 1, x: 0, duration: 1.2, ease: "power2.out", scrollTrigger: { trigger: ".map-reveal-1", start: "top 80%" } }
+        );
+
+        // Map 2 Reveal
+        gsap.fromTo(".map-reveal-2", 
+            { opacity: 0, x: 50 },
+            { opacity: 1, x: 0, duration: 1.2, ease: "power2.out", scrollTrigger: { trigger: ".map-reveal-2", start: "top 80%" } }
+        );
+    }
+});
+
+// Location Petals Animation
+class FlowerPetal {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.reset();
+        this.y = Math.random() * canvas.height;
+    }
+    reset() {
+        this.x = Math.random() * this.canvas.width;
+        this.y = -20;
+        this.size = Math.random() * 10 + 5;
+        this.speedY = Math.random() * 1.5 + 0.5; 
+        this.swing = Math.random() * 1.5;
+        this.swingSpeed = Math.random() * 0.02 + 0.01;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 2 - 1;
+        this.color = Math.random() > 0.5 ? '#E0115F' : '#FF69B4'; // Rose / Pink
+    }
+    update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * this.swingSpeed) * this.swing;
+        this.rotation += this.rotationSpeed;
+        if (this.y > this.canvas.height + 20) this.reset();
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size / 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+let locationPetals = [];
+let locationCanvas = null;
+let lctx2 = null;
+
+function initLocationPetals() {
+    locationCanvas = document.getElementById('location-petals-canvas');
+    if (!locationCanvas) return;
+    lctx2 = locationCanvas.getContext('2d');
+    locationCanvas.width = window.innerWidth;
+    locationCanvas.height = window.innerHeight;
+    locationPetals = Array.from({ length: 40 }, () => new FlowerPetal(locationCanvas));
+}
+
+function animateLocationPetalsTick() {
+    if (!lctx2) return;
+    lctx2.clearRect(0, 0, locationCanvas.width, locationCanvas.height);
+    locationPetals.forEach(p => {
+        p.update();
+        p.draw(lctx2);
+    });
+}
+
+window.addEventListener('resize', () => {
+    if (locationCanvas) {
+        locationCanvas.width = window.innerWidth;
+        locationCanvas.height = window.innerHeight;
+    }
+});
+
+ScrollTrigger.create({
+    trigger: "#location-section",
+    start: "top bottom",
+    onEnter: () => {
+        if (locationPetals.length === 0) initLocationPetals();
+        gsap.ticker.add(animateLocationPetalsTick);
+    },
+    onLeave: () => gsap.ticker.remove(animateLocationPetalsTick),
+    onEnterBack: () => gsap.ticker.add(animateLocationPetalsTick),
+    onLeaveBack: () => gsap.ticker.remove(animateLocationPetalsTick)
+});
